@@ -1,4 +1,3 @@
-# VERSION 1.0.0
 FROM radektomasek/keboola-base-node
 MAINTAINER Radek Tomasek <radek.tomasek@gmail.com>
 
