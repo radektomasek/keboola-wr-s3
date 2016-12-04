@@ -1,0 +1,93 @@
+{
+  "title": "Parameters",
+  "type": "object",
+  "required": [
+    "#s3_access_key_id",
+    "#s3_secret_access_key",
+    "s3_bucket_name",
+    "s3_remote_path",
+    "s3_region",
+    "compress_output",
+    "append_datetime",
+    "datetime_position",
+    "datetime_format"
+  ],
+  "properties": {
+    "#s3_access_key_id": {
+      "title": "S3 Access Key Id",
+      "type": "string",
+      "format": "password",
+      "minLength": 1,
+      "default": ""
+    },
+    "#s3_secret_access_key": {
+      "title": "S3 Secret Access Key",
+      "type": "string",
+      "format": "password",
+      "minLength": 1,
+      "default": ""
+    },
+    "s3_bucket_name": {
+      "title": "S3 Bucket Name",
+      "type": "string",
+      "minLength": 1,
+      "default": ""
+    },
+    "s3_remote_path": {
+      "title": "S3 Remote Path",
+      "type": "string",
+      "minLength": 1,
+      "default": "/kbc_upload"
+    },
+    "s3_region": {
+      "title": "S3 Region",
+      "type": "string",
+      "enum": [
+        "us-east-1",
+        "us-west-1",
+        "us-west-2",
+        "eu-west-1",
+        "eu-central-1",
+        "ap-northeast-1",
+        "ap-northeast-2",
+        "ap-southeast-1",
+        "ap-southeast-2",
+        "sa-east-1"
+      ],
+      "default": "us-east-1"
+    },
+    "compress_output": {
+      "title": "Compress output (gzip)",
+      "type": "boolean",
+      "enum": [
+        false,
+        true
+      ],
+      "default": false
+    },
+    "append_datetime": {
+      "title": "Append datetime",
+      "type": "boolean",
+      "enum": [
+        false,
+        true
+      ],
+      "default": false
+    },
+    "datetime_position": {
+      "title": "Datetime position",
+      "type": "string",
+      "enum": [
+        "prefix",
+        "postfix"
+      ],
+      "default": "prefix"
+    },
+    "datetime_format": {
+      "title": "Datetime format",
+      "type": "string",
+      "minLength": 1,
+      "default": "YYYYMMDD_HHmmss"
+    }
+  }
+}
