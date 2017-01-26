@@ -1,14 +1,14 @@
 'use strict';
 import AWS from 'aws-sdk';
 import path from 'path';
+import * as constants from './lib/constants';
 import command from './lib/helpers/cliHelper';
 import { getConfig } from './lib/helpers/configHelper';
-import { uploadFiles } from './lib/helpers/s3Helper';
+import { uploadFiles, listObjects } from './lib/helpers/s3Helper';
 import { parseConfiguration } from './lib/helpers/keboolaHelper';
-import { CONFIG_FILE, DEFAULT_OUTPUT_DIR, INPUT_TABLES_DIR } from './lib/constants';
 
-const CONFIG = getConfig(path.join(command.data, CONFIG_FILE));
-const SOURCE_DIR = path.join(command.data, INPUT_TABLES_DIR);
+const CONFIG = getConfig(path.join(command.data, constants.CONFIG_FILE));
+const SOURCE_DIR = path.join(command.data, constants.INPUT_TABLES_DIR);
 
 (async() => {
   try {
@@ -25,6 +25,7 @@ const SOURCE_DIR = path.join(command.data, INPUT_TABLES_DIR);
     } = await parseConfiguration(CONFIG);
     // Set AWS environment.
     AWS.config.update({ accessKeyId, secretAccessKey, region });
+
     // Process the files selected in the KBC.
     const result = await Promise.all(
       uploadFiles(

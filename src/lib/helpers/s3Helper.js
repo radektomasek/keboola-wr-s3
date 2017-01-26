@@ -18,14 +18,13 @@ export function uploadFiles(
         return new Promise((resolve, reject) => {
           const fileName = getFileName(destination, fileNameExtension);
           const key = compressOutput ? `${fileName}.gz` : fileName;
-          const bucket = path.join(bucketName, remotePath);
-          const s3 = new AWS.S3({ params: { Bucket: bucket, Key: key }});
+          const s3 = new AWS.S3();
           let body = compressOutput ?
             fs.createReadStream(`${SOURCE_DIR}/${destination}`).pipe(zlib.createGzip()) :
             fs.createReadStream(`${SOURCE_DIR}/${destination}`);
-          s3.upload({ Body: body })
+          s3.upload({ Bucket: bucketName, Key: path.join(remotePath, key), Body: body })
             .send((error, data) => error ?
-              reject(error) : resolve(`Successfully uploaded data to ${bucket}/${key}`));
+              reject(error) : resolve(`Successfully uploaded data to ${bucketName}`));
         });
       })(file)
     );
